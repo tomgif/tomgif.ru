@@ -1,33 +1,21 @@
 <template>
-  <div class="blog-posts" style="overflow: hidden; outline: none;">
+  <perfect-scrollbar class="blog-posts">
     <blog-post :post="post">
       <div slot="content" v-html="post.detail"/>
       <blog-comments :comments="post.comments"/>
-      <form class="contact-form">
-        <div class="row">
-          <div class="col-lg-6">
-            <input type="text" placeholder="Name">
-          </div>
-          <div class="col-lg-6">
-            <input type="text" placeholder="E-mail">
-          </div>
-          <div class="col-lg-12">
-            <input type="text" placeholder="Website (optional)">
-            <textarea placeholder="Comment"></textarea>
-            <button class="site-btn">comment submit<img src="img/arrow-right.png" alt=""></button>
-          </div>
-        </div>
-      </form>
+      <comment-form/>
     </blog-post>
-  </div>
+  </perfect-scrollbar>
 </template>
 
 <script>
   import BlogPost from '~/components/BlogPost';
   import BlogComments from '~/components/BlogComments';
+  import {PerfectScrollbar} from 'vue2-perfect-scrollbar';
+  import CommentForm from '../../components/CommentForm';
 
   export default {
-    components: {BlogPost, BlogComments},
+    components: {BlogPost, BlogComments, PerfectScrollbar, CommentForm},
 
     data() {
       return {
@@ -67,11 +55,21 @@
 </script>
 
 <style lang="scss">
-  .blog-comments {
-    padding-top: 60px;
+  .blog-id-page {
+    padding-right: 70px;
 
-    h4 {
-      margin-bottom: 40px;
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      padding: 0 15px;
+      margin: 0;
     }
+
+    @media only screen and (max-width: 767px) {
+      padding: 0 15px;
+      margin: 0;
+    }
+  }
+
+  .blog-posts {
+    height: 100%;
   }
 </style>

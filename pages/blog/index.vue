@@ -1,18 +1,19 @@
 <template>
-  <div class="blog-posts">
+  <perfect-scrollbar class="blog-posts">
     <blog-post :post="post" v-for="post in posts" :key="post.id">
       <p slot="content">
         {{post.excerpt}}
       </p>
     </blog-post>
-  </div>
+  </perfect-scrollbar>
 </template>
 
 <script>
   import BlogPost from '../../components/BlogPost';
+  import {PerfectScrollbar} from 'vue2-perfect-scrollbar';
 
   export default {
-    components: {BlogPost},
+    components: {BlogPost, PerfectScrollbar},
 
     data() {
       return {

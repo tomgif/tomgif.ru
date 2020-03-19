@@ -27,6 +27,9 @@ html {
   line-height: 1.15; // 3
   -webkit-text-size-adjust: 100%; // 4
   -webkit-tap-highlight-color: rgba($black, 0); // 5
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 
 // Shim for "new" HTML5 structural elements to display correctly (IE10, older browsers)
@@ -52,6 +55,9 @@ body {
   color: $body-color;
   text-align: left; // 3
   background-color: $body-bg; // 2
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 
 // Future-proof rule: in browsers that support :focus-visible, suppress the focus outline
@@ -101,6 +107,9 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: $paragraph-margin-bottom;
+  font-size: 13px;
+  color: #242424;
+  line-height: 2;
 }
 
 // Abbreviations
@@ -129,8 +138,8 @@ address {
 ol,
 ul,
 dl {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 ol ol,
@@ -191,6 +200,7 @@ a {
   @include hover() {
     //color: $link-hover-color;
     text-decoration: $link-hover-decoration;
+    outline: none;
   }
 }
 
@@ -249,6 +259,7 @@ figure {
 img {
   vertical-align: middle;
   border-style: none; // Remove the border on images inside links in IE 10-.
+  max-width: 100%;
 }
 
 svg {
@@ -305,8 +316,7 @@ button {
 //
 // Credit: https://github.com/suitcss/base/
 button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 input,
@@ -318,6 +328,12 @@ textarea {
   font-family: inherit;
   @include font-size(inherit);
   line-height: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
 }
 
 button,

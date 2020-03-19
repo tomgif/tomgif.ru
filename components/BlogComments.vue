@@ -1,6 +1,6 @@
 <template>
   <div class="blog-comments">
-    <h4>Комментарии</h4>
+    <div class="blog-comments__title">Комментарии</div>
     <ul class="comments-list">
       <li class="comments-list__item" v-for="comment in comments" :key="comment.id">
         <blog-comment :comment="comment"/>
@@ -28,6 +28,18 @@
     &__item {
       display: block;
       margin-bottom: 43px;
+    }
+  }
+
+  .blog-comments {
+    padding-top: 60px;
+
+    &__title {
+      margin: 0 0 40px;
+      color: #242424;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 1.2;
     }
   }
 </style>

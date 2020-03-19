@@ -51,7 +51,7 @@ module.exports = {
   ],
 
   plugins: [
-    '~plugins/fontawesome.js'
+    {src: '~plugins/fontawesome.js'}
   ],
 
   buildModules: [
@@ -60,6 +60,10 @@ module.exports = {
 
   moment: {
     locales: ['ru']
+  },
+
+  extractCSS: {
+    allChunks: true
   }
 };
 

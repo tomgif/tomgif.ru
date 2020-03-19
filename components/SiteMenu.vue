@@ -23,6 +23,7 @@
           {path: '/about', title: 'Обо мне', name: 'about'},
           {path: '/blog', title: 'Блог', name: 'blog'},
           {path: '/portfolio', title: 'Портфолио', name: 'portfolio'},
+          {path: '/contacts', title: 'Контакты', name: 'contacts'}
         ]
       }
     }

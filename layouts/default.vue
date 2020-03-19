@@ -9,7 +9,14 @@
     </div>
     <site-header :socials="socials"/>
     <div class="site-content-wrap" :class="contentWrapClassName">
-      <sidebar/>
+      <div class="main-sidebar" v-if="isMobile">
+        <sidebar/>
+      </div>
+
+      <perfect-scrollbar class="main-sidebar" v-else>
+        <sidebar/>
+      </perfect-scrollbar>
+
       <div class="page-section" :class="pageClassName">
         <nuxt/>
       </div>
@@ -25,9 +32,11 @@
   import TheCopyright from '../components/TheCopyright'
   import SocialIcons from '../components/SocialIcons';
   import SiteMenu from '../components/SiteMenu';
+  import {PerfectScrollbar} from 'vue2-perfect-scrollbar'
+  import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css';
 
   export default {
-    components: {Sidebar, SiteHeader, TheCopyright, SocialIcons, SiteMenu},
+    components: {Sidebar, SiteHeader, TheCopyright, SocialIcons, SiteMenu, PerfectScrollbar},
 
     data() {
       return {
@@ -49,9 +58,32 @@
       }
     },
 
+    created() {
+      if (process.browser) {
+        this.handleResize();
+        window.addEventListener('resize', this.handleResize);
+      }
+    },
+
+    destroyed() {
+      if (process.browser) {
+        window.removeEventListener('resize', this.handleResize);
+      }
+    },
+
+    methods: {
+      handleResize() {
+        this.$store.commit({
+          type: 'window/set',
+          value: window.innerWidth < 768
+        });
+      }
+    },
+
     computed: {
       ...mapState({
-        isSidebarToggled: state => state.sidebar.isToggled
+        isSidebarToggled: state => state.sidebar.isToggled,
+        isMobile: state => state.window.isMobile
       }),
 
       mainWrapClassName() {
@@ -84,7 +116,7 @@
       $route() {
         this.$store.commit('sidebar/hide');
       }
-    },
+    }
   }
 </script>
 
@@ -183,5 +215,38 @@
 
   .page-section {
     height: 100%;
+  }
+
+  .ps {
+    height: 100%;
+  }
+
+  .main-sidebar {
+    position: absolute;
+    width: 614px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 99;
+
+    @media only screen and (min-width: 1200px) and (max-width: 1400px) {
+      width: 450px;
+    }
+
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      width: 350px;
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+    @media only screen and (max-width: 767px) {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
   }
 </style>
